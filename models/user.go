@@ -6,6 +6,6 @@ import (
 
 type User struct {
 	Uid      	bson.ObjectId 	`bson:"_id" json:"id"`
-	username 	string        	`bson:"username" json:"username"`
+	Username 	string        	`bson:"username" json:"username"`
 	Wokspaces	[]Workspace 	`bson: "wslist" json:"wslist"`
 }

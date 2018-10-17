@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/LaughingBudda/codecloud-server/apihandlers"
+	"github.com/LaughingBudda/codecloud-server/collab"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 )
@@ -16,6 +17,8 @@ func main() {
 	r.Handle("/user/{id}", apihandlers.FindUser).Methods("GET")
 	r.Handle("/createuser/", apihandlers.CreateUser).Methods("POST")
 	r.Handle("/removeuser/", apihandlers.RemoveUser).Methods("DELETE")
+	http.HandleFunc("/ws", collab.HandleConnections)
+	go collab.HandleMessages()
 
 	http.ListenAndServe(":3000", handlers.LoggingHandler(os.Stdout, r))
 }
